@@ -1,0 +1,16 @@
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+end
+
+{{ if and (eq .chezmoi.os "darwin") (eq .chezmoi.arch "arm64") }}
+# homebrew stuff
+eval "$(/opt/homebrew/bin/brew shellenv)"
+{{ end }}
+
+# abbrs for forwarding RDP port to a remote Windows machine through taurus
+abbr -a winlab "ssh -fNL 3389:172.20.43.166:3389 taurus"
+abbr -a winlab-stop "pkill -f 'ssh -fNL 3389:172.20.43.166:3389 taurus'"
+
+# SQL Server port forwarding
+abbr -a wsql "ssh -fNL 1433:172.20.43.166:1433 taurus"
+abbr -a wsql-stop "pkill -f ssh -fNL 1433:172.20.43.166:1433 taurus"
